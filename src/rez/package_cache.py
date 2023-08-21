@@ -112,6 +112,13 @@ class PackageCache(object):
             if e.errno == errno.ENOENT:
                 # maybe got cleaned up by other process
                 return None
+            elif e.errno == errno.EACCES:
+                # Cant access the cached folder, permission problem.
+                print_warning(
+                    "Failed to read package cache, permission error."
+                    " Will use non-cached version: %s" % json_filepath
+                )
+                return None
             else:
                 raise
 
