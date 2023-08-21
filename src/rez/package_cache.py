@@ -442,8 +442,12 @@ class PackageCache(object):
 
             filename = prefix + uuid4().hex + ".json"
             filepath = os.path.join(self._pending_dir, filename)
-            with open(filepath, 'w') as f:
-                f.write(json.dumps(handle_dict))
+            try:
+                with open(filepath, 'w') as f:
+                    f.write(json.dumps(handle_dict))
+            except:
+                # TODO: proper execption
+                continue
 
         # configure executable
         if platform.system() == "Windows":
