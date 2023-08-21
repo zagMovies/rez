@@ -933,6 +933,15 @@ pip_install_remaps = [
         "pip_install": r"\1",
         "rez_install": r"python{s}\1",
     },
+    # Fix for OpenCue.pyoutline
+    # Path in record          | pip installed to    | copy to rez destination
+    # ------------------------|---------------------|--------------------------
+    # .../../wrappers/*       | wrappers/*          | python/*
+    {
+        "record_path": r"{pardir}{sep}{pardir}{sep}wrappers{sep}(.*)",
+        "pip_install": r"\.{sep}wrappers{sep}\1",
+        "rez_install": r"\.{sep}wrappers{sep}\1",
+    },
 ]
 
 # Optional variables. A dict type config for storing arbitrary data that can be
